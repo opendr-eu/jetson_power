@@ -92,8 +92,6 @@ class PowerEstimator:
         total_time = time.time() - start
         return total_energy, total_energy_over_idle, total_time
 
-        pass
-
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
