@@ -103,4 +103,4 @@ if __name__ == '__main__':
 
     print("Total energy consumption was = %7.3f J" % (total_energy / 1000.0))
     print("Total energy over baseline was = %7.3f J" % (total_energy_over_idle / 1000.0))
-    print("Total time running was = %3.2d s" % total_time)
+    print("Total time running was = %5.2f s" % total_time)
