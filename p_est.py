@@ -29,13 +29,14 @@ class PowerEstimator:
     def _device_scan(self, base_path):
         # Scan for a maximum of 5 sensors
         files = ['iio_device/in_power' + str(i) + '_input' for i in range(5)]
-        files.extend(['iio:device0/in_power' + str(i) + '_input' for i in range(5)])
         for _, folders, _ in os.walk(base_path):
             for folder in folders:
                 for file in files:
                     cur_path = os.path.join(base_path, folder, file)
                     if os.path.exists(cur_path):
                         self.devices.append(cur_path)
+                    elif os.path.exists(cur_path.replace("iio_device","iio:device0")):
+                        self.devices.append(cur_path.replace("iio_device","iio:device0"))
 
     def _get_instant_power(self):
         total_power = 0
