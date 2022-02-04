@@ -19,7 +19,7 @@ class PowerEstimator:
 
         self.devices = []
         self._device_scan('/sys/bus/i2c/drivers/ina3221x/')
-        self._device_scan('/sys/devices/3160000.i2c/i2c-0/')
+        #self._device_scan('/sys/devices/3160000.i2c/i2c-0/')
         print("[OpenDR PowerLogger] Found %d power devices" % (len(self.devices)))
 
         self.idle_load = 0
