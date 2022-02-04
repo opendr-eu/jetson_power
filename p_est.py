@@ -27,7 +27,6 @@ class PowerEstimator:
         self.sampling_interval = 1.0 / sampling_rate
 
     def _device_scan(self, base_path):
-        # Scan for a maximum of 5 sensors
         files = ['iio_device/in_power' + str(i) + '_input' for i in range(5)]
         for _, folders, _ in os.walk(base_path):
             for folder in folders:
@@ -35,8 +34,14 @@ class PowerEstimator:
                     cur_path = os.path.join(base_path, folder, file)
                     if os.path.exists(cur_path):
                         self.devices.append(cur_path)
+                        print("Device found @",  cur_path)
                     elif os.path.exists(cur_path.replace("iio_device","iio:device0")):
                         self.devices.append(cur_path.replace("iio_device","iio:device0"))
+                        print("Device found @", cur_path.replace("iio_device","iio:device0"))
+                    for i in range(1, 5):
+                        if os.path.exists(cur_path.replace("iio_device","iio:device" + str(i))):
+                             self.devices.append(cur_path.replace("iio_device","iio:device" + str(i)))
+                             print("Device found @", cur_path.replace("iio_device","iio:device" + str(i)))
 
     def _get_instant_power(self):
         total_power = 0
